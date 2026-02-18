@@ -1,7 +1,12 @@
+import java.io.File;
+import java.net.URL;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import Pages.ProfilePage;
 
 public class FileUpload {
 	public static void main(String[] args) throws InterruptedException{
@@ -17,10 +22,9 @@ public class FileUpload {
     	WebElement resetButton = driver.findElement(By.cssSelector(".btn.btn-warning.btn-reset"));  
     	
     	// Get the path to the file to upload
-    	String imagePath = FileUpload.class.getClassLoader()
-                .getResource("file-to-upload.png")
-                .getPath();
-    	
+    	// Get the path to the file to upload
+    	URL pic = FileUpload.class.getClassLoader().getResource("file-to-upload.png");
+    	String imagePath = new File(pic.getPath()).getAbsolutePath();
     	System.out.println(imagePath);
     	
     	// Upload the file and click the reset button
