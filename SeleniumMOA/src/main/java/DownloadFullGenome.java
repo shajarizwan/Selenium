@@ -1,5 +1,7 @@
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,8 +17,10 @@ public class DownloadFullGenome {
 		List<String> SPECIES_LIST = List.of(
 				"fake species", 
 				"Candidatus Fermentibacterota bacterium", 
-				"Drosophila Melanogaster");
+				"Drosophila Melanogaster",
+				"Avena Sativa");
 		
+		Map<String, String> accessions = new HashMap<>();
 		
 		// Create new instance of ChromeDriver
 		WebDriver driver = new ChromeDriver();
@@ -33,10 +37,14 @@ public class DownloadFullGenome {
     		if (genomeFound) {
     			Boolean verifiedAssemblyFound = SearchResultsPage.clickVerifiedAssembly(driver, wait, SPECIES);
     			if (verifiedAssemblyFound) {
-    				System.out.println(SPECIES + " " + AssemblyPage.getAccession(driver, wait));
+    				String accession = AssemblyPage.getAccession(driver, wait);
+    				accessions.put(SPECIES, accession);
     			}
     		}
 		}
+		
+		// Print out the accessions hashmap
+		accessions.forEach((key, value) -> System.out.println(key + " : " + value));
 		
     	// Add an implicit wait for 5 seconds. 
     	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
