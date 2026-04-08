@@ -20,7 +20,7 @@ public class SearchResultsPage {
 			verifiedAssembly.click();	
 			return true;
 		} catch (TimeoutException e) {
-			System.out.println(String.format("No verified assembly for %s", species));
+			System.out.println(species + ": " + String.format("No verified assembly for %s", species));
 			return false;
 		}
 	}

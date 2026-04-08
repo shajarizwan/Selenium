@@ -22,7 +22,7 @@ public class GenomeSearchPage {
     	
     	try {
     		WebElement muiAlert = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div .MuiAlert-message")));
-    		System.out.println(muiAlert.getText());
+    		System.out.println(searchTerm + ": " + muiAlert.getText());
     		return false;
     	} catch (TimeoutException e) {
 			return true;
